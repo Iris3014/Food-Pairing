@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Finder Results</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/images/resultmainbg.webp'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Ensures background stays fixed */
+            color: #333;
+        }
+
+        /* Semi-transparent background with reduced opacity for visibility */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3); /* Light semi-transparent overlay */
+            backdrop-filter: blur(4px); /* Subtle blur effect */
+            z-index: -1;
+        }
+
+        /* Header styling */
+        h1 {
+            color: #333;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Main container */
+        .container {
+            width: 100%;
+            max-width: 12500px;
+            margin: 30px auto;
+            background: rgba(147, 25, 25, 0.85); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Results section */
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333; /* Black header */
+            color: white; /* White text */
+        }
+
+        td {
+            background-color: #f9f9f9; /* Light grey for readability */
+            color: #333;
+        }
+
+        /* "No Results" message */
+        .no-results {
+            font-size: 1.2em;
+            color: #d9534f;
+            margin-top: 20px;
+        }
+
+        /* Back to Search Button */
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #333; /* Black background */
+            color: white; /* White text */
+            border-radius: 5px;
+            border: 2px solid white; /* Subtle white border */
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: white; /* White background on hover */
+            color: #333; /* Black text on hover */
+            border-color: #333; /* Black border on hover */
+        }
+
+        /* Responsive adjustments */
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .results {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Results for Ingredients: "{{ original_ingredients }}"</h1>
+    <div class="container">
+        {% if data_preview %}
+            <div class="results">
+                <h2>Matching Recipes</h2>
+                <div class="data-preview">
+                    {{ data_preview | safe }} <!-- This will display the filtered data table -->
+                </div>
+            </div>
+        {% else %}
+            <p class="no-results">No results found for the given ingredients. Please try again with different ingredients.</p>
+        {% endif %}
+
+        <a href="/" class="back-button">Back to Search</a>
+    </div>
+</body>
+</html>

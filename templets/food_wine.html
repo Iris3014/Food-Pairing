@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food and Beverage Pairing</title>
+    <style>
+        /* Apply background image */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Create the blurred background container */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/static/images/winebg.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: blur(8px); /* Apply blur to the background */
+            z-index: -1; /* Keep it behind the content */
+        }
+
+        /* Content box */
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 30px;
+            /*background-color: rgba(255, 255, 255, 0.7);  Semi-transparent background */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 50px;
+        }
+
+        input, button {
+            padding: 10px;
+            font-size: 1em;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 300px;
+        }
+
+        button {
+            background-color:black;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background image -->
+    <div class="background"></div>
+
+    <!-- Content -->
+    <div class="content">
+        <h1>Enter Food to Find Wine Pairing</h1>
+        <form action="/results" method="POST">
+            <input type="text" name="food_query" placeholder="Enter food to search for wine pairing" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</body>
+</html>

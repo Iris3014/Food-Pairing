@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Pairing Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Apply background image */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Create the blurred background container */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/static/images/winebg.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: blur(8px); /* Apply blur to the background */
+            z-index: -1; /* Keep it behind the content */
+        }
+
+        /* Content box */
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* Table container with fixed height and scrollable */
+        .table-container {
+            max-height: 400px; /* Adjust the height for scrolling */
+            overflow-y: auto; /* Makes the table scrollable */
+            margin-top: 20px;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+           /* background-color: rgba(0, 0, 0, 0.5);  Semi-transparent black */
+            color: white;
+            border-radius: 8px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+            
+        }
+
+        th {
+            background-color: #040303;
+            color: white;
+        }
+
+        td {
+            background-color: rgba(255, 243, 243, 0.2); /* Slightly transparent white for the table cells */
+        }
+
+        a {
+            color: #8e2424;
+        }
+
+        a.btn {
+            background-color: #050705;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background image -->
+    <div class="background"></div>
+
+    <!-- Content -->
+    <div class="content">
+        <h1 class="mt-5">Results for: "{{ food_query }}"</h1>
+        <div class="mt-4">
+            <h3>Pairing Data:</h3>
+            <!-- Table container to make it scrollable -->
+            <div class="table-container">
+                {% if data_preview %}
+                    <table class="table table-striped">
+                        <tbody>
+                            {{ data_preview | safe }}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No results found for the given query.</p>
+                {% endif %}
+            </div>
+        </div>
+        <a href="/" class="btn btn-secondary mt-3">Back to Search</a>
+    </div>
+</body>
+</html>

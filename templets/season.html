@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seasonal Food Pairings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      position: relative;
+      z-index: 0;
+    }
+
+    /* Blurred Background Image */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('/static/images/seasonbgf.jpg') no-repeat center center/cover;
+      filter: blur(8px);
+      z-index: -1;
+    }
+
+    h1 {
+      color: #e9e4e4;
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: rgb(76, 73, 67);
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: rgb(105, 101, 97);
+    }
+
+    .container {
+      margin-top: 20px;
+    }
+
+    .pairing-card {
+      background: white;
+      padding: 10px;
+      margin: 10px auto;
+      width: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1 >Seasonal Food Pairings</h1>
+
+  <!-- Filter Buttons -->
+  <button onclick="fetchData()">All</button>
+  <button onclick="fetchBySeason('Winter')">Winter</button>
+  <button onclick="fetchBySeason('Summer')">Summer</button>
+  <button onclick="fetchBySeason('Spring')">Spring</button>
+
+  <div class="container" id="pairings-container"></div>
+
+  <script>
+    function fetchData() {
+      fetch("/pairings")
+        .then(response => response.json())
+        .then(data => {
+          console.log("All data fetched:", data);
+          displayPairings(data);
+        })
+        .catch(error => console.error("Error fetching data:", error));
+    }
+
+    function fetchBySeason(season) {
+      fetch(`/pairings/season/${season}`)
+        .then(response => response.json())
+        .then(data => {
+          console.log(`Data fetched for season: ${season}`, data);
+          displayPairings(data);
+        })
+        .catch(error => console.error("Error fetching data:", error));
+    }
+
+    function displayPairings(data) {
+      const container = document.getElementById("pairings-container");
+      container.innerHTML = data.map(item => `
+        <div class="pairing-card">
+          <h3>${item.Ingredient}</h3>
+          <p><strong>Season:</strong> ${item.Season}</p>
+          <p><strong>Cuisine:</strong> ${item.Cuisine}</p>
+          <p><strong>Pairings:</strong> ${item.Pairings.replace(/[\[\]']/g, "")}</p>
+        </div>
+      `).join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchData);
+  </script>
+</body>
+</html>
