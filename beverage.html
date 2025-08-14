@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food and Beverage Pairing</title>
+    <style>  
+        /* Apply background image without blur on the body */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-image: url('/static/images/bevbg.jpeg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            position: relative;
+            margin: 0;
+        }
+
+        /* Create a pseudo element for the blur effect */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: inherit;
+            background-size: inherit;
+            background-position: inherit;
+            filter: blur(5px); /* Apply blur to the background only */
+            z-index: 1; /* Keep it behind the content */
+        }
+
+        /* Content container to keep the content visible */
+        .content {
+            position: relative;
+            z-index: 2; /* Ensure the content stays on top */
+           /* background-color: rgba(255, 255, 255, 0.8);  Semi-transparent background for better readability */
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            color: black;
+            margin-top: 100px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: bold;
+        }
+
+        form {
+            text-align: center;
+        
+        }
+
+        input, button {
+            padding: 10px;
+            font-size: 1em;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 300px;
+        }
+
+        button {
+            background-color: #0a0b0a;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Enter Food to Find Beverage Pairing</h1>
+        <form action="/results" method="POST">
+            <input type="text" name="food_query" placeholder="Enter food to search for pairing" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</body>
+</html>
