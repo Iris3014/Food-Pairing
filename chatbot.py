@@ -4,8 +4,8 @@ import re
 
 app = Flask(__name__)
 
-OPENROUTER_API_KEY = "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"
-YOUTUBE_API_KEY = "AIzaSyBIhRemW0zhMQXkg6vpkPqFiuGIZUd2LVs"
+OPENROUTER_API_KEY = "your_api_key"
+YOUTUBE_API_KEY = "your_api_key"
 
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
@@ -86,3 +86,4 @@ def fetch_youtube_videos(query):
 
 if __name__ == "__main__":
     app.run(debug=True, port=5002)
+
